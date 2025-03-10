@@ -54,6 +54,7 @@ export default {
     const fetchPosts = async () => {
       try {
         const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+        console.log(response);
         if (!response.ok) throw new Error('err');
         posts.value = await response.json();
       } catch (error) {
@@ -63,22 +64,6 @@ export default {
       }
     };
     const totalPages = computed(() => Math.ceil(posts.value.length / itemsPerPage));
-    /*
-        const totalPages = computed(() => Math.ceil(posts.value.length / itemsPerPage.value));
-
-        const paginatedPosts = computed(() => {
-          const start = (currentPage.value - 1) * itemsPerPage.value;
-          console.log("2", start, posts.value.slice(start, start + itemsPerPage.value );
-          return posts.value.slice(start, start + itemsPerPage.value);
-        });
-
-        const displayedPages = computed(() => {
-          let start = Math.max(1, currentPage.value - Math.floor(maxPageLinks.value / 2));
-          let end = Math.min(totalPages.value, start + maxPageLinks.value - 1);
-
-          return Array.from({ length: end - start + 1 }, (_, i) => start + i);
-        });
-    */
 
     const paginatedPosts = computed(() => {
       const start = (currentPage.value - 1) * itemsPerPage;
